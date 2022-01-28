@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity implements Fragment1.ISendDataListener{
+public class MainActivity extends AppCompatActivity implements Fragment1.ISendDataListener, Fragment2.IUpdateDataListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,5 +25,11 @@ public class MainActivity extends AppCompatActivity implements Fragment1.ISendDa
     public void sendData(String email) {
             Fragment2 fragment2 = (Fragment2) getSupportFragmentManager().findFragmentById(R.id.fameLayout2);
             fragment2.receiveDataFromFragment1(email);
+    }
+
+    @Override
+    public void updateData(String email) {
+        Fragment1 fragment1 = (Fragment1) getSupportFragmentManager().findFragmentById(R.id.fameLayout1);
+        fragment1.updateDataFromFragment2(email);
     }
 }

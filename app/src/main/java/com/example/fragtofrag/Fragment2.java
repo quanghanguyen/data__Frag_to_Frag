@@ -1,5 +1,6 @@
 package com.example.fragtofrag;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -30,8 +32,21 @@ public class Fragment2 extends Fragment {
 
     private View mView;
 
+    private IUpdateDataListener mIUpdateDataListener;
+    public interface IUpdateDataListener
+    {
+        void updateData(String email);
+    }
+
+
     public Fragment2() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mIUpdateDataListener = (IUpdateDataListener) getActivity();
     }
 
     /**
@@ -81,6 +96,8 @@ public class Fragment2 extends Fragment {
     }
 
     private void updateDatatoFragment1() {
+        String strEmailUpdate = edtEmail.getText().toString().trim();
+        mIUpdateDataListener.updateData(strEmailUpdate);
     }
 
     public void receiveDataFromFragment1(String email)

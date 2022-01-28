@@ -98,4 +98,9 @@ public class Fragment1 extends Fragment {
         String strEmail = edtEmail.getText().toString().trim();
         mISendDataListener.sendData(strEmail);
     }
+
+    public void updateDataFromFragment2(String email)
+    {
+        edtEmail.setText(email);
+    }
 }
